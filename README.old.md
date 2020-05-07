@@ -1,2 +1,0 @@
-# demo-redux
-react + redux
