@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 项目启动
 
-## Available Scripts
+`yarn`
+`yarn start`
 
-In the project directory, you can run:
+### 技术点总结
 
-### `yarn start`
+Redux 三个基本原则： 单一数据源、 State 只读、 使用纯函数来修改执行
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Action 是把数据从应用传到 store 的有效载荷，它是 store 数据的唯一来源。一般通过 store.dispatch() 将 action 传到 store。
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Reducers 指定了应用状态的变化如何响应 actions 并发送到 store 的，记住 actions 只是描述了有事情发生了这一事实，并没有描述应用如何更新 state。
 
-### `yarn test`
+Store 就是把 Action、Reducers 联系到一起的对象。Store 有以下职责：
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 维持应用的 state；
+- 提供 getState() 方法获取 state；
+- 提供 dispatch(action) 方法更新 state；
+- 通过 subscribe(listener) 注册监听器;
+- 通过 subscribe(listener) 返回的函数注销监听器。
 
-### `yarn build`
+#### redux
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `createStore(reducer, [preloadedState], enhancer)`
+    创建一个 Redux store 来以存放应用中所有的 state。应用中应有且仅有一个 store。
+- `applyMiddleware(...middleware)`
+- `combineReducers(reducers)`
+    combineReducers 辅助函数的作用是，把一个由多个不同 reducer 函数作为 value 的 object，合并成一个最终的 reducer 函数。
+    由 combineReducers() 返回的 state 对象，会将传入的每个 reducer 返回的 state 按其传递给 combineReducers() 时对应的 key 进行命名。
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    ```js
+    rootReducer = combineReducers({potato: potatoReducer, tomato: tomatoReducer})
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### react-redux
 
-### `yarn eject`
+- `<Provider store>` 使组件层级中的 connect() 方法都能够获得 Redux store。
+- `connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])` 连接 React 组件与 Redux store。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### redux-thunk
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+让 store.dispatch 变成可以接收一个函数/一个对象的中间件。统一了异步和同步 action 的调用方式。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [redux-thunk作用](https://www.jianshu.com/p/8dc309a8b4f7)
+- [关于 redux-thunk 的作用，认识，理解](https://blog.csdn.net/Jioho_chen/article/details/104884490)

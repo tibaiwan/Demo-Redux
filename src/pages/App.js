@@ -1,53 +1,54 @@
 import React from 'react';
 import { Input, Button, List } from 'antd';
 import { connect } from 'react-redux';
-import { addTodo, deleteTodo, inputChange } from '../actions/todo';
+import { addTodo, initTodo, deleteTodo, inputChange } from '../store/actions/todo';
 import './app.css'
 
-const TodoList = ({ todolist, inputText, addTodo, deleteTodo, inputChange }) => {
+class TodoList extends React.Component {
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(initTodo());
+  }
 
-  const handleClickAdd = () => {
+  handleClickAdd() {
+    const { inputText, dispatch } = this.props;
     if (!inputText.trim()) return
-    addTodo(inputText);
-    inputChange('')
+    dispatch(addTodo(inputText));
+    dispatch(inputChange(''));
   }
 
-  const handleInput = (e) => {
-    inputChange(e.target.value)
+  handleInput(e) {
+    const { dispatch } = this.props;
+    dispatch(inputChange(e.target.value));
   }
 
-  return (
-    <div className="container">
+  render() {
+    return (
+      <div className="container">
 
-      <div className="header">
-        <Input placeholder="Input todo" value={inputText} allowClear onChange={handleInput} />
-        <Button type="primary" onClick={handleClickAdd}>Primary</Button>
+        <div className="header">
+          <Input placeholder="Input todo" value={this.props.inputText} allowClear onChange={this.handleInput.bind(this)} />
+          <Button type="primary" onClick={this.handleClickAdd.bind(this)}>Add</Button>
+        </div>
+  
+        <div className="body">
+          <List
+            className="demo-loadmore-list"
+            itemLayout="horizontal"
+            dataSource={this.props.todolist}
+            renderItem={(item, index) => (
+              <List.Item
+                actions={[<div key="delete" onClick={() => this.props.dispatch(deleteTodo(index))}>delete</div>]}
+              >
+                {item}
+              </List.Item>
+            )}
+          />
+        </div>
       </div>
-
-      <div className="body">
-        <List
-          className="demo-loadmore-list"
-          itemLayout="horizontal"
-          dataSource={todolist}
-          renderItem={(item, index) => (
-            <List.Item
-              actions={[<div key="delete" onClick={() => deleteTodo(index)}>delete</div>]}
-            >
-              {item}
-            </List.Item>
-          )}
-        />
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
-const mapStateToProps = state => ({ todolist: state.todolist, inputText: state.inputText });
-const mapDispatchToProps = dispatch => ({
-  addTodo: text => dispatch(addTodo(text)),
-  deleteTodo: index => dispatch(deleteTodo(index)),
-  inputChange: inputText => dispatch(inputChange(inputText))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(state => ({...state}))(TodoList);
