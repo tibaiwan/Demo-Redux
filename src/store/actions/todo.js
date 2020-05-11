@@ -14,8 +14,3 @@ export const deleteTodo = index => ({
   type: T.DELETE_TODO,
   index
 });
-
-export const inputChange = inputText => ({
-  type: T.INPUT_CHANGE,
-  inputText
-});

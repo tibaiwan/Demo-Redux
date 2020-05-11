@@ -30,21 +30,15 @@ Store 就是把 Action、Reducers 联系到一起的对象。Store 有以下职�
 
 ### redux
 
-- `createStore(reducer, [preloadedState], enhancer)`
-    创建一个 Redux store 来以存放应用中所有的 state。应用中应有且仅有一个 store。
-- `applyMiddleware(...middleware)`
-- `combineReducers(reducers)`
-    combineReducers 辅助函数的作用是，把一个由多个不同 reducer 函数作为 value 的 object，合并成一个最终的 reducer 函数。
-    由 combineReducers() 返回的 state 对象，会将传入的每个 reducer 返回的 state 按其传递给 combineReducers() 时对应的 key 进行命名。
-
-    ```js
-    rootReducer = combineReducers({potato: potatoReducer, tomato: tomatoReducer})
-    ```
+- `createStore(reducer, [preloadedState], enhancer)` 创建一个 Redux store 来以存放应用中所有的 state；
+- `applyMiddleware(...middleware)` 应用中间件；
+- `combineReducers(reducers)` 是一个辅助函数，把多个 reducer 函数合并成一个最终的 reducer 函数；
+- `bindActionCreators(actionCreators, dispatch) ` 使用 dispatch 对每个 action creator 进行包装，以便可以直接调用它们；
 
 ### react-redux
 
-- `<Provider store>` 使组件层级中的 connect() 方法都能够获得 Redux store。
-- `connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])` 连接 React 组件与 Redux store。
+- `<Provider store>` 使组件层级中的 connect() 方法都能够获得 Redux store；
+- `connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])` 连接 React 组件与 Redux store；
 
 ### SEE ALSO
 

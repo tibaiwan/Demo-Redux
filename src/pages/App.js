@@ -3,7 +3,8 @@ import { Input, Button, List } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import fetch from 'cross-fetch';
-import { initTodo, addTodo, deleteTodo, inputChange } from '../store/actions/todo';
+import { initTodo, addTodo, deleteTodo } from '../store/actions/todo';
+import { inputChange } from '../store/actions/input';
 import { API_getTodoList } from '../store/api';
 import './app.css'
 
@@ -39,6 +40,7 @@ class TodoList extends React.Component {
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
+            loading={this.props.isLoading}
             dataSource={this.props.todolist}
             renderItem={(item, index) => (
               <List.Item
@@ -55,8 +57,9 @@ class TodoList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  todolist: state.todolist,
-  inputText: state.inputText
+  todolist: state.todo.todolist,
+  isLoading: state.todo.isLoading,
+  inputText: state.input.inputText
 });
 
 /*
