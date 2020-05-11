@@ -37,14 +37,6 @@ Store 就是把 Action、Reducers 联系到一起的对象。Store 有以下职�
 - `<Provider store>` 使组件层级中的 connect() 方法都能够获得 Redux store。
 - `connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])` 连接 React 组件与 Redux store。
 
-### redux-thunk
-
-让 store.dispatch 变成可以接收一个函数/一个对象的中间件。统一了异步和同步 action 的调用方式。
-
-- [redux-thunk作用](https://www.jianshu.com/p/8dc309a8b4f7)
-- [关于 redux-thunk 的作用，认识，理解](https://blog.csdn.net/Jioho_chen/article/details/104884490)
-
 ### SEE ALSO
 
 - [redux EN](https://redux.js.org/)
-- [redux CN](https://www.redux.org.cn/)

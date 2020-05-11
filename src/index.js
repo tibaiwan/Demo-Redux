@@ -8,8 +8,8 @@ import 'antd/dist/antd.css';
 
 import App from './pages/App';
 import { reducerTodo } from './store/reducers/todos';
-const logger = createLogger();
 
+const logger = createLogger();
 const store = createStore(reducerTodo, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
