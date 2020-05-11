@@ -1,26 +1,29 @@
 import React from 'react';
 import { Input, Button, List } from 'antd';
 import { connect } from 'react-redux';
-import { addTodo, initTodo, deleteTodo, inputChange } from '../store/actions/todo';
+import { bindActionCreators } from 'redux';
+import fetch from 'cross-fetch';
+import { initTodo, addTodo, deleteTodo, inputChange } from '../store/actions/todo';
+import { API_getTodoList } from '../store/api';
 import './app.css'
 
 class TodoList extends React.Component {
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(initTodo());
+    fetch(API_getTodoList).then(response => response.json()).then(res => {
+      this.props.initTodo(res)
+    });
   }
 
   handleClickAdd() {
-    const { inputText, dispatch } = this.props;
+    const { inputText } = this.props;
     if (!inputText.trim()) return
-    dispatch(addTodo(inputText));
-    dispatch(inputChange(''));
+    this.props.addTodo(inputText);
+    this.props.inputChange('');
   }
 
   handleInput(e) {
-    const { dispatch } = this.props;
-    dispatch(inputChange(e.target.value));
+    this.props.inputChange(e.target.value);
   }
 
   render() {
@@ -36,11 +39,10 @@ class TodoList extends React.Component {
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
-            loading={this.props.isLoading}
             dataSource={this.props.todolist}
             renderItem={(item, index) => (
               <List.Item
-                actions={[<div key="delete" onClick={() => this.props.dispatch(deleteTodo(index))}>delete</div>]}
+                actions={[<div key="delete" onClick={() => this.props.deleteTodo(index)}>delete</div>]}
               >
                 {item}
               </List.Item>
@@ -52,4 +54,23 @@ class TodoList extends React.Component {
   }
 }
 
-export default connect(state => ({...state}))(TodoList);
+const mapStateToProps = state => ({
+  todolist: state.todolist,
+  inputText: state.inputText
+});
+
+/*
+const mapDispatchToProps = dispatch => ({
+  initTodo: todolist => dispatch(initTodo(todolist)),
+  addTodo: text => dispatch(addTodo(text)),
+  deleteTodo: index => dispatch(deleteTodo(index)),
+  inputChange: inputText => dispatch(inputChange(inputText))
+});
+*/
+
+// 简写版，功能同上
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({initTodo, addTodo, deleteTodo, inputChange}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

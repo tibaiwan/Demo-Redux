@@ -5,15 +5,16 @@ yarn
 yarn start # 不同分支需重新yarn
 ```
 
-## 分支DEMO
+## 分支技术一览
 
-redux-thunk DEMO: `feature/redux-thunk`  
-redux-thunk + redux-actions DEMO: `feature/redux-actions`  
-redux-saga DEMO: `feature/redux-saga`  
+- `feature/redux` mapStateToProps, mapDispatchToProps, bindActionCreators
+- `feature/redux-thunk` redux-thunk
+- `feature/redux-actions` redux-thunk, redux-actions
+- `feature/redux-saga` redux-saga
 
 ## 技术点总结
 
-Redux 三个基本原则： 单一数据源、 State 只读、 使用纯函数来修改执行
+Redux 三个基本原则： 单一数据源、 State 只读、 使用纯函数来修改执行。
 
 Action 是把数据从应用传到 store 的有效载荷，它是 store 数据的唯一来源。一般通过 store.dispatch() 将 action 传到 store。
 
