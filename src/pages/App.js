@@ -52,4 +52,9 @@ class TodoList extends React.Component {
   }
 }
 
-export default connect(state => ({...state}))(TodoList);
+const mapStateToProps = state => ({
+  todolist: state.todo.todolist,
+  inputText: state.input.inputText
+})
+
+export default connect(mapStateToProps)(TodoList);

@@ -7,10 +7,10 @@ import thunk from 'redux-thunk';
 import 'antd/dist/antd.css';
 
 import App from './pages/App';
-import { reducerTodo } from './store/reducers/todos';
+import { reducer } from './store/reducers';
 const logger = createLogger();
 
-const store = createStore(reducerTodo, applyMiddleware(thunk, logger));
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>
