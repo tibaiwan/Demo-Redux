@@ -3,13 +3,16 @@ import * as T from '../actionTypes';
 import { API_getTodoList } from '../api';
 
 export const initTodo = () => {
-    return dispatch => fetch(API_getTodoList).then(response => response.json())
-    .then(res => {
-        dispatch({
-            type: T.INIT_TODO,
-            todolist: res
+    return (dispatch, getState) => {
+        console.log('getState', getState());
+        fetch(API_getTodoList).then(response => response.json())
+        .then(res => {
+            dispatch({
+                type: T.INIT_TODO,
+                todolist: res
+            });
         });
-    });
+    }
 }
 
 export const addTodo = (text) => {
