@@ -7,7 +7,7 @@ yarn start # 不同分支需重新yarn
 
 ## 分支技术一览
 
-- `feature/redux` mapStateToProps, mapDispatchToProps, bindActionCreators
+- `feature/react-redux` mapStateToProps, mapDispatchToProps, bindActionCreators
 - `feature/redux-thunk` redux-thunk
 - `feature/redux-actions` redux-thunk, redux-actions
 - `feature/redux-saga` redux-saga
