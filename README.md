@@ -1,7 +1,9 @@
 ## 项目启动
 
-`yarn`
-`yarn start`
+```bash
+yarn
+yarn start
+```
 
 ## 技术点总结
 
