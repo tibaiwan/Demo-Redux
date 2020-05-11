@@ -1,26 +1,27 @@
 import React from 'react';
 import { Input, Button, List } from 'antd';
 import { connect } from 'react-redux';
-import { addTodo, initTodo, deleteTodo, inputChange } from '../store/actions/todo';
+import * as ACTION_TODO from '../store/actions/todo';
+import * as ACTION_INPUT from '../store/actions/input';
 import './app.css'
 
 class TodoList extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(initTodo());
+    dispatch(ACTION_TODO.initTodoAsync());
   }
 
   handleClickAdd() {
     const { inputText, dispatch } = this.props;
     if (!inputText.trim()) return
-    dispatch(addTodo(inputText));
-    dispatch(inputChange(''));
+    dispatch(ACTION_TODO.addTodoAsync(inputText));
+    dispatch(ACTION_INPUT.inputChangeSync(''));
   }
 
   handleInput(e) {
     const { dispatch } = this.props;
-    dispatch(inputChange(e.target.value));
+    dispatch(ACTION_INPUT.inputChangeSync(e.target.value));
   }
 
   render() {
@@ -40,7 +41,7 @@ class TodoList extends React.Component {
             dataSource={this.props.todolist}
             renderItem={(item, index) => (
               <List.Item
-                actions={[<div key="delete" onClick={() => this.props.dispatch(deleteTodo(index))}>delete</div>]}
+                actions={[<div key="delete" onClick={() => this.props.dispatch(ACTION_TODO.deleteTodoAsync(index))}>delete</div>]}
               >
                 {item}
               </List.Item>
@@ -53,8 +54,8 @@ class TodoList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  todolist: state.todo.todolist,
-  inputText: state.input.inputText
+  ...state.todo,
+  ...state.input
 })
 
 export default connect(mapStateToProps)(TodoList);

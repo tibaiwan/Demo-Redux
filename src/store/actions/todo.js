@@ -1,37 +1,29 @@
 import fetch from 'cross-fetch';
+import { createAction } from 'redux-actions';
 import * as T from '../actionTypes';
 import { API_getTodoList } from '../api';
 
-export const initTodo = () => {
+export const initTodoAsync = () => {
     return (dispatch, getState) => {
         console.log('getState', getState());
+        // get ...
         fetch(API_getTodoList).then(response => response.json())
         .then(res => {
-            dispatch({
-                type: T.INIT_TODO,
-                todolist: res
-            });
+            dispatch(createAction(T.INIT_TODO)(res));
         });
     }
 }
 
-export const addTodo = (text) => {
-    return dispatch => dispatch({
-        type: T.ADD_TODO,
-        text
-    })
+export const addTodoAsync = (todo) => {
+    return dispatch => {
+        // post ...
+        dispatch(createAction(T.ADD_TODO)(todo));
+    }
 }
 
-export const deleteTodo = (index) => {
-    return dispatch => dispatch({
-        type: T.DELETE_TODO,
-        index
-    })
-}
-
-export const inputChange = (inputText) => {
-    return dispatch => dispatch({
-        type: T.INPUT_CHANGE,
-        inputText
-    })
+export const deleteTodoAsync = (index) => {
+    return dispatch => {
+        // delete ...
+        dispatch(createAction(T.DELETE_TODO)(index));
+    }
 }

@@ -1,22 +1,22 @@
+import { handleActions } from 'redux-actions';
 import * as T from '../actionTypes';
 
 const defaultState = {
-    inputText: '',
     isLoading: true,
     todolist: []
 }
 
-export const reducerTodo = (state = defaultState, actions) => {
-    switch (actions.type) {
-        case T.INIT_TODO:
-            return { ...state, todolist: actions.todolist, isLoading: false };
-        case T.ADD_TODO:
-            return { ...state, todolist: state.todolist.concat(actions.text) };
-        case T.DELETE_TODO:
-            return { ...state, todolist: state.todolist.filter((item, index) => index !== actions.index) };
-        case T.INPUT_CHANGE:
-            return { ...state, inputText: actions.inputText };
-        default:
-            return state
-    }
-}
+export const reducerTodo = handleActions(
+    {
+        [T.INIT_TODO]: (state, action) => ({
+            todolist: action.payload, isLoading: false
+        }),
+        [T.ADD_TODO]: (state, action) => ({
+            todolist: state.todolist.concat(action.payload)
+        }),
+        [T.DELETE_TODO]: (state, action) => ({
+            todolist: state.todolist.filter((item, index) => index !== action.payload)
+        })
+    },
+    defaultState
+)
