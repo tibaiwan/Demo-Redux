@@ -36,6 +36,7 @@ class TodoList extends React.Component {
           <List
             className="demo-loadmore-list"
             itemLayout="horizontal"
+            loading={this.props.isLoading}
             dataSource={this.props.todolist}
             renderItem={(item, index) => (
               <List.Item
