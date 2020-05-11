@@ -1,7 +1,15 @@
 ## 项目启动
 
-`yarn`
-`yarn start`
+```bash
+yarn
+yarn start # 不同分支需重新yarn
+```
+
+## 分支DEMO
+
+redux-thunk DEMO: `feature/redux-thunk`  
+redux-thunk + redux-actions DEMO: `feature/redux-actions`  
+redux-saga DEMO: `feature/redux-saga`  
 
 ## 技术点总结
 
