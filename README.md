@@ -1,10 +1,3 @@
-## 项目启动
-
-```bash
-yarn
-yarn start
-```
-
 ## 技术点总结
 
 ### react-actions
