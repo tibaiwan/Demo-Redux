@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducerInput } from './input';
-import { reducerTodo } from './todos';
+import { reducerTodo } from './todo';
 
 export const reducer = combineReducers({
     input: reducerInput,
