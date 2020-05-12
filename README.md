@@ -1,16 +1,18 @@
-## 项目启动
-
-```bash
-yarn
-yarn start # 不同分支引用的包不同，需重新执行yarn
-```
-
-## 分支技术一览
+## 分支一览
 
 - `feature/react-redux` mapStateToProps, mapDispatchToProps, bindActionCreators
 - `feature/redux-thunk` redux-thunk
 - `feature/redux-actions` redux-thunk, redux-actions
 - `feature/redux-saga` redux-saga
+
+## 项目启动
+
+`master` 分支无代码，请先 checkout 到上述分支。
+
+```bash
+yarn # 不同分支引入的包不同，需重新执行yarn
+yarn start
+```
 
 ## 技术点总结
 
