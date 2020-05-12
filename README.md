@@ -1,45 +1,37 @@
-## 项目启动
-
-```bash
-yarn
-yarn start # 不同分支需重新yarn
-```
-
-## 分支技术一览
-
-- `feature/react-redux` mapStateToProps, mapDispatchToProps, bindActionCreators
-- `feature/redux-thunk` redux-thunk
-- `feature/redux-actions` redux-thunk, redux-actions
-- `feature/redux-saga` redux-saga
-
 ## 技术点总结
 
-Redux 三个基本原则： 单一数据源、 State 只读、 使用纯函数来修改执行。
-
-Action 是把数据从应用传到 store 的有效载荷，它是 store 数据的唯一来源。一般通过 store.dispatch() 将 action 传到 store。
-
-Reducers 指定了应用状态的变化如何响应 actions 并发送到 store 的，记住 actions 只是描述了有事情发生了这一事实，并没有描述应用如何更新 state。
-
-Store 就是把 Action、Reducers 联系到一起的对象。Store 有以下职责：
-
-- 维持应用的 state；
-- 提供 getState() 方法获取 state；
-- 提供 dispatch(action) 方法更新 state；
-- 通过 subscribe(listener) 注册监听器;
-- 通过 subscribe(listener) 返回的函数注销监听器。
-
-### redux
-
-- `createStore(reducer, [preloadedState], enhancer)` 创建一个 Redux store 来以存放应用中所有的 state；
-- `applyMiddleware(...middleware)` 应用中间件；
-- `combineReducers(reducers)` 是一个辅助函数，把多个 reducer 函数合并成一个最终的 reducer 函数；
-- `bindActionCreators(actionCreators, dispatch) ` 使用 dispatch 对每个 action creator 进行包装，以便可以直接调用它们；
-
-### react-redux
+### react-redux API
 
 - `<Provider store>` 使组件层级中的 connect() 方法都能够获得 Redux store；
 - `connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])` 连接 React 组件与 Redux store；
 
-### SEE ALSO
+### mapDispatchToProps 三种写法
 
-- [redux EN](https://redux.js.org/)
+方法一：
+
+```js
+const mapDispatchToPropsV1 = dispatch => ({
+  initTodo: todolist => dispatch(initTodo(todolist)),
+  addTodo: text => dispatch(addTodo(text)),
+  deleteTodo: index => dispatch(deleteTodo(index)),
+  inputChange: inputText => dispatch(inputChange(inputText))
+});
+```
+
+方法二：
+
+```js
+import { bindActionCreators } from 'redux';
+
+const mapDispatchToPropsV2 = dispatch => {
+  return bindActionCreators({initTodo, addTodo, deleteTodo, inputChange}, dispatch);
+};
+```
+
+方法三：
+
+```js
+const mapDispatchToPropsV3 = {
+  initTodo, addTodo, deleteTodo, inputChange
+};
+```

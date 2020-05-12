@@ -62,18 +62,23 @@ const mapStateToProps = state => ({
   inputText: state.input.inputText
 });
 
-/*
-const mapDispatchToProps = dispatch => ({
+// 方法一
+const mapDispatchToPropsV1 = dispatch => ({
   initTodo: todolist => dispatch(initTodo(todolist)),
   addTodo: text => dispatch(addTodo(text)),
   deleteTodo: index => dispatch(deleteTodo(index)),
   inputChange: inputText => dispatch(inputChange(inputText))
 });
-*/
 
-// 简写版，功能同上
-const mapDispatchToProps = dispatch => {
+
+// 方法二
+const mapDispatchToPropsV2 = dispatch => {
   return bindActionCreators({initTodo, addTodo, deleteTodo, inputChange}, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+// 方法三
+const mapDispatchToPropsV3 = {
+  initTodo, addTodo, deleteTodo, inputChange
+};
+
+export default connect(mapStateToProps, mapDispatchToPropsV3)(TodoList);
