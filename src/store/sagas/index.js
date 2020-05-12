@@ -1,7 +1,7 @@
-import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
+import { call, put, fork, take, takeEvery, all } from 'redux-saga/effects';
 import * as T from '../actionTypes';
 import * as todoActions from '../actions/todo';
-import { API } from '../services/todo';
+import { API } from '../services';
 
 // 处理
 export function* initTodoAsync() {
@@ -12,6 +12,14 @@ export function* initTodoAsync() {
 // 监听
 export function* watchInitTodoAsync() {
     yield takeEvery(T.FETCH_TODO, initTodoAsync);
+}
+
+// 监听 方法二
+export function* watchInitTodoAsyncV2() {
+    while(true) {
+        yield take(T.FETCH_TODO);
+        yield call(initTodoAsync);
+    }
 }
 
 // 执行监听
