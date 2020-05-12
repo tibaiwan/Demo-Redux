@@ -56,12 +56,14 @@ class TodoList extends React.Component {
   }
 }
 
+// 映射store.getState()的数据到 APP 组件
 const mapStateToProps = state => ({
   todolist: state.todo.todolist,
   isLoading: state.todo.isLoading,
   inputText: state.input.inputText
 });
 
+// 映射使用了store.dispatch的函数到 APP 组件
 // 方法一
 const mapDispatchToPropsV1 = dispatch => ({
   initTodo: todolist => dispatch(initTodo(todolist)),
