@@ -50,3 +50,4 @@ Store 就是把 Action、Reducers 联系到一起的对象。Store 有以下职�
 ### SEE ALSO
 
 - [redux EN](https://redux.js.org/)
+- [Redux与它的中间件：redux-thunk，redux-actions，redux-promise，redux-saga](https://www.cnblogs.com/vvjiang/p/9505646.html)
