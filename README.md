@@ -1,6 +1,6 @@
-### Redux Demo
+### Demo 动态图
 
-<img width="400" src="./doc/redux.gif" alt="Redux 工作流">
+<img width="400" src="./doc/redux.gif" alt="Demo 动态图">
 
 ## 分支一览
 
