@@ -1,5 +1,9 @@
 import * as T from '../actionTypes';
 
+export const fetchTodolist = () => ({
+  type: T.FETCH_TODO
+});
+
 export const initTodo = todolist => ({
   type: T.INIT_TODO,
   todolist

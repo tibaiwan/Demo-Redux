@@ -2,18 +2,14 @@ import React from 'react';
 import { Input, Button, List } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import fetch from 'cross-fetch';
-import { initTodo, addTodo, deleteTodo } from '../store/actions/todo';
+import { fetchTodolist, initTodo, addTodo, deleteTodo } from '../store/actions/todo';
 import { inputChange } from '../store/actions/input';
-import { API_getTodoList } from '../store/api';
 import './app.css'
 
 class TodoList extends React.Component {
 
   componentDidMount() {
-    fetch(API_getTodoList).then(response => response.json()).then(res => {
-      this.props.initTodo(res)
-    });
+    this.props.fetchTodolist();
   }
 
   handleClickAdd() {
@@ -73,7 +69,7 @@ const mapDispatchToProps = dispatch => ({
 
 // 简写版，功能同上
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({initTodo, addTodo, deleteTodo, inputChange}, dispatch);
+  return bindActionCreators({fetchTodolist, initTodo, addTodo, deleteTodo, inputChange}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
