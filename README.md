@@ -1,17 +1,3 @@
-## 项目启动
-
-```bash
-yarn
-yarn start # 不同分支需重新yarn
-```
-
-## 分支技术一览
-
-- `feature/react-redux` mapStateToProps, mapDispatchToProps, bindActionCreators
-- `feature/redux-thunk` redux-thunk
-- `feature/redux-actions` redux-thunk, redux-actions
-- `feature/redux-saga` redux-saga
-
 ## 技术点总结
 
 ### redux-saga
@@ -19,13 +5,13 @@ yarn start # 不同分支需重新yarn
 - `redux-saga`
     - delay 延迟
 - `redux-saga/effects`
-    - put 创建一个 Effect 描述信息，用来命令 middleware 向 Store 发起一个 action。相当于dispatch 。
-    - takeEvery 在发起（dispatch）到 Store 并且匹配 pattern 的每一个 action 上派生一个 saga。
     - all 类似promise.all
+    - takeEvery 在发起（dispatch）到 Store 并且匹配 pattern 的每一个 action 上派生一个 saga。
+    - put 创建一个 Effect 描述信息，用来命令 middleware 向 Store 发起一个 action。相当于dispatch 。
     - fork 创建一个 Effect 描述信息，用来命令 middleware 以 非阻塞调用 的形式执行 fn。
     - call 创建一个 Effect 描述信息，用来命令 middleware 以参数 args 调用函数 fn 。
     - take 创建一个 Effect 描述信息，用来命令 middleware 在 Store 上等待指定的 action。
-    - select 创建一个 Effect，用来命令 middleware 在当前 Store 的 state 上调用指定的选择器。
+    - select 创建一个 Effect 描述信息，用来命令 middleware 在当前 Store 的 state 上调用指定的选择器。
 
 ### SEE ALSO
 
