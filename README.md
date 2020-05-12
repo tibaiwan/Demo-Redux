@@ -32,7 +32,7 @@ Store 就是把 Action、Reducers 联系到一起的对象。Store 有以下职�
 - 通过 subscribe(listener) 注册监听器；
 - 通过 subscribe(listener) 返回的函数注销监听器；
 
-### redux API
+### Redux API
 
 - `createStore(reducer, [preloadedState], enhancer)` 创建一个 Redux store 来以存放应用中所有的 state；
 - `applyMiddleware(...middleware)` 应用中间件；
