@@ -1,3 +1,7 @@
+### Redux Demo
+
+<img width="400" src="./doc/redux.gif" alt="Redux 工作流">
+
 ## 分支一览
 
 - `feature/react-redux` mapStateToProps, mapDispatchToProps, bindActionCreators
