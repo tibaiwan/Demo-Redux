@@ -1,11 +1,22 @@
 ## 项目启动
 
-`yarn`
-`yarn start`
+```bash
+yarn
+yarn start # 不同分支引用的包不同，需重新执行yarn
+```
+
+## 分支技术一览
+
+- `feature/react-redux` mapStateToProps, mapDispatchToProps, bindActionCreators
+- `feature/redux-thunk` redux-thunk
+- `feature/redux-actions` redux-thunk, redux-actions
+- `feature/redux-saga` redux-saga
 
 ## 技术点总结
 
-Redux 三个基本原则： 单一数据源、 State 只读、 使用纯函数来修改执行
+概念：Redux 是 JavaScript 状态容器，提供可预测化的状态管理。
+
+Redux 三个基本原则： 单一数据源、 State 只读、 使用纯函数来修改执行。
 
 Action 是把数据从应用传到 store 的有效载荷，它是 store 数据的唯一来源。一般通过 store.dispatch() 将 action 传到 store。
 
@@ -16,35 +27,20 @@ Store 就是把 Action、Reducers 联系到一起的对象。Store 有以下职�
 - 维持应用的 state；
 - 提供 getState() 方法获取 state；
 - 提供 dispatch(action) 方法更新 state；
-- 通过 subscribe(listener) 注册监听器;
-- 通过 subscribe(listener) 返回的函数注销监听器。
+- 通过 subscribe(listener) 注册监听器；
+- 通过 subscribe(listener) 返回的函数注销监听器；
 
-### redux
+### redux API
 
-- `createStore(reducer, [preloadedState], enhancer)`
-    创建一个 Redux store 来以存放应用中所有的 state。应用中应有且仅有一个 store。
-- `applyMiddleware(...middleware)`
-- `combineReducers(reducers)`
-    combineReducers 辅助函数的作用是，把一个由多个不同 reducer 函数作为 value 的 object，合并成一个最终的 reducer 函数。
-    由 combineReducers() 返回的 state 对象，会将传入的每个 reducer 返回的 state 按其传递给 combineReducers() 时对应的 key 进行命名。
+- `createStore(reducer, [preloadedState], enhancer)` 创建一个 Redux store 来以存放应用中所有的 state；
+- `applyMiddleware(...middleware)` 应用中间件；
+- `combineReducers(reducers)` 是一个辅助函数，把多个 reducer 函数合并成一个最终的 reducer 函数；
+- `bindActionCreators(actionCreators, dispatch) ` 使用 dispatch 对每个 action creator 进行包装，以便可以直接调用它们；
 
-    ```js
-    rootReducer = combineReducers({potato: potatoReducer, tomato: tomatoReducer})
-    ```
+### Redux 工作流
 
-### react-redux
-
-- `<Provider store>` 使组件层级中的 connect() 方法都能够获得 Redux store。
-- `connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])` 连接 React 组件与 Redux store。
-
-### redux-thunk
-
-让 store.dispatch 变成可以接收一个函数/一个对象的中间件。统一了异步和同步 action 的调用方式。
-
-- [redux-thunk作用](https://www.jianshu.com/p/8dc309a8b4f7)
-- [关于 redux-thunk 的作用，认识，理解](https://blog.csdn.net/Jioho_chen/article/details/104884490)
+<img width="600" src="./doc/redux_flow.jpeg" alt="Redux 工作流">
 
 ### SEE ALSO
 
 - [redux EN](https://redux.js.org/)
-- [redux CN](https://www.redux.org.cn/)
