@@ -70,7 +70,6 @@ const mapDispatchToPropsV1 = dispatch => ({
   inputChange: inputText => dispatch(inputChange(inputText))
 });
 
-
 // 方法二
 const mapDispatchToPropsV2 = dispatch => {
   return bindActionCreators({initTodo, addTodo, deleteTodo, inputChange}, dispatch);
@@ -80,5 +79,9 @@ const mapDispatchToPropsV2 = dispatch => {
 const mapDispatchToPropsV3 = {
   initTodo, addTodo, deleteTodo, inputChange
 };
+
+console.log('mapDispatchToPropsV1', mapDispatchToPropsV1);
+console.log('mapDispatchToPropsV2', mapDispatchToPropsV2);
+console.log('mapDispatchToPropsV3', mapDispatchToPropsV3);
 
 export default connect(mapStateToProps, mapDispatchToPropsV3)(TodoList);
